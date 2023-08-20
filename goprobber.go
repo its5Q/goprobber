@@ -15,6 +15,7 @@ import (
 	"net/url"
 	"os"
 	"strconv"
+	"strings"
 	"sync"
 	"time"
 
@@ -165,7 +166,7 @@ func doFingerprinting(dnsResponses <-chan DNSResponse, results chan<- Fingerprin
 				}
 			} else if tokenType == html.TextToken {
 				if isTitle {
-					title = tokenizer.Token().Data
+					title = strings.TrimSpace(tokenizer.Token().Data)
 					isTitle = false
 				}
 			}
