@@ -281,7 +281,10 @@ func main() {
 					ips = append(ips, net.ParseIP(answer.Data))
 				}
 			}
-			domains <- DNSResponse{domain: massdnsOutput.Name[:len(massdnsOutput.Name)-1], ips: ips}
+
+			if len(ips) > 0 {
+				domains <- DNSResponse{domain: massdnsOutput.Name[:len(massdnsOutput.Name)-1], ips: ips}
+			}
 		}
 		close(domains)
 	}()
