@@ -166,6 +166,7 @@ func doFingerprinting(dnsResponses <-chan DNSResponse, results chan<- Fingerprin
 			} else if tokenType == html.TextToken {
 				if isTitle {
 					title = tokenizer.Token().Data
+					isTitle = false
 				}
 			}
 		}
