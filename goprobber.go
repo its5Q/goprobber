@@ -193,8 +193,6 @@ func doFingerprinting(dnsResponses <-chan DNSResponse, results chan<- Fingerprin
 			faviconUrl = responseURL.String()
 		}
 
-		log.Println(faviconUrl)
-
 		// Get favicon
 		req, err = http.NewRequest("GET", faviconUrl, nil)
 		if err != nil {
