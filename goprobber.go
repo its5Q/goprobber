@@ -105,7 +105,11 @@ func doFingerprinting(dnsResponses <-chan DNSResponse, results chan<- Fingerprin
 	client := &http.Client{Timeout: 25 * time.Second, Transport: tr}
 
 	for response := range dnsResponses {
-		fingerprint := Fingerprint{Domain: response.domain}
+		var domain = strings.TrimSpace(response.domain)
+		if strings.Contains(domain, "*.") {
+			domain = strings.ReplaceAll(domain, "*.", "")
+		}
+		fingerprint := Fingerprint{Domain: domain}
 		resolvedIP = response.ips[0].String()
 		resolvedHostname = fingerprint.Domain
 
